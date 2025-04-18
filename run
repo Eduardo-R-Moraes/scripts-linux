@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# O arquivo recebe um parâmetro:
+# 1. O nome do arquivo assembly (.asm) se a extensão no final
+
+FILENAME=$1
+
+# Compila arquivo
+compile $FILENAME
+
+# Se arquivo foi compilado com sucesso
+if [[ -f "$FILENAME" ]]; then
+	./$FILENAME && \  # Roda arquivo
+	rm -f "$FILENAME" # Deleta arquivo
+else
+	# Se o arquivo não existir
+	# Manda mensagem de erro
+	echo "Erro: a compilação falhou, arquivo '$FILENAME' não encontrado."
+	exit 1
+fi
